@@ -1,0 +1,51 @@
+### 유저 리스트 조회
+GET http://localhost:8081/api/accounts/users
+X-User-Id: admin
+
+### 유저 생성
+POST http://localhost:8081/api/accounts/users
+Content-Type: application/json
+
+{
+  "userId": "delete",
+  "email": "delete@example.com",
+  "password": "pwd123",
+  "role": "USER"
+}
+
+### 유저 단건 조회
+GET localhost:8081/api/accounts/users/user
+X-User-Id: user
+
+### 유저 정보 수정
+POST localhost:8081/api/accounts/users/user
+Content-Type: application/json
+X-User-Id: user
+
+{
+  "email": "user1@example.com",
+  "password": "new123",
+  "status": "ACTIVE"
+}
+
+### 유저 삭제
+DELETE localhost:8081/api/accounts/users/delete
+X-User-Id: delete
+
+### 유저 상태 변경
+POST localhost:8081/api/accounts/users/user/status
+Content-Type: application/json
+X-User-Id: admin
+
+{
+  "status": "ACTIVE"
+}
+
+### 로그인
+POST http://localhost:8081/api/accounts/login
+Content-Type: application/json
+
+{
+  "userId": "admin",
+  "password": "pwd123"
+}
