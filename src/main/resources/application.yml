@@ -1,3 +1,30 @@
 spring:
   application:
     name: account-api
+  session:
+    store-type: redis
+  data:
+    redis:
+      host: 10.116.64.14
+      port: 6379
+      password: "*N2vya7H@muDTwdNMR!"
+      database: 22
+
+
+
+  datasource:
+    url: jdbc:mysql://10.116.64.14:13306/nhn_academy_22?serverTimezone=Asia/Seoul&useSSL=false
+    username: nhn_academy_22
+    password: "h_8_TkaVj3!4Okzq"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8081
