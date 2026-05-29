@@ -1,4 +1,4 @@
-package com.nhnacademy.accountapi.dto.user;
+package com.nhnacademy.accountapi.dto;
 
 import com.nhnacademy.accountapi.entity.UserRole;
 import com.nhnacademy.accountapi.entity.UserStatus;

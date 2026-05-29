@@ -1,4 +1,4 @@
-package com.nhnacademy.accountapi.dto.user;
+package com.nhnacademy.accountapi.dto;
 
 import com.nhnacademy.accountapi.entity.UserRole;
 import jakarta.validation.constraints.Email;
@@ -11,7 +11,6 @@ public record UserCreateRequest(
         String email,
         @NotNull
         String password,
-        @NotNull
         UserRole role
 ) {
 }

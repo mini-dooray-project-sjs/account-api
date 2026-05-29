@@ -1,6 +1,6 @@
 package com.nhnacademy.accountapi.controller;
 
-import com.nhnacademy.accountapi.dto.user.*;
+import com.nhnacademy.accountapi.dto.*;
 import com.nhnacademy.accountapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
