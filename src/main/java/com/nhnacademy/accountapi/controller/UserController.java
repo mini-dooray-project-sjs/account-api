@@ -91,4 +91,14 @@ public class UserController {
 
         return ResponseEntity.ok(resp);
     }
+
+    // 유저 로그인 관련 정보 조회
+    @GetMapping("/{user-id}/login-info")
+    public ResponseEntity<UserLoginResponse> getLoginInfo(
+            @PathVariable("user-id") String userId
+    ) {
+        UserLoginResponse resp=userService.getLoginInfo(userId);
+
+        return ResponseEntity.ok(resp);
+    }
 }

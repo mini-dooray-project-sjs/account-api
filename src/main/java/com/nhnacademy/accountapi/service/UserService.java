@@ -20,4 +20,7 @@ public interface UserService {
     UserResponse changeUserStatus(String userId, String requestId, UserStatusUpdateRequest req);
 
     UserExistsResponse checkUserExists(String userId);
+
+    // 로그인 관련 정보 조회
+    UserLoginResponse getLoginInfo(String userId);
 }
