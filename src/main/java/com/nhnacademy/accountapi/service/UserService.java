@@ -1,8 +1,6 @@
 package com.nhnacademy.accountapi.service;
 
-import com.nhnacademy.accountapi.dto.auth.LoginRequest;
-import com.nhnacademy.accountapi.dto.auth.LoginResponse;
-import com.nhnacademy.accountapi.dto.user.*;
+import com.nhnacademy.accountapi.dto.*;
 
 import java.util.List;
 
@@ -20,8 +18,6 @@ public interface UserService {
     void deleteUser(String userId, String requestId);
 
     UserResponse changeUserStatus(String userId, String requestId, UserStatusUpdateRequest req);
-
-    LoginResponse login(LoginRequest req);
 
     UserExistsResponse checkUserExists(String userId);
 }
