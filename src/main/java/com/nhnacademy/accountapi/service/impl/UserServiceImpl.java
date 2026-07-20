@@ -1,8 +1,6 @@
 package com.nhnacademy.accountapi.service.impl;
 
-import com.nhnacademy.accountapi.dto.auth.LoginRequest;
-import com.nhnacademy.accountapi.dto.auth.LoginResponse;
-import com.nhnacademy.accountapi.dto.user.*;
+import com.nhnacademy.accountapi.dto.*;
 import com.nhnacademy.accountapi.entity.User;
 import com.nhnacademy.accountapi.entity.UserRole;
 import com.nhnacademy.accountapi.entity.UserStatus;
@@ -65,12 +63,18 @@ public class UserServiceImpl implements UserService {
         // 비밀번호 암호화
         String password=passwordEncoder.encode(req.password());
 
+        UserRole role=req.role();
+
+        if(role==null) {
+            role=UserRole.USER; // 기본값으로 USER 역할 설정
+        }
+
         // 유저 생성
         User user=User.builder()
                 .id(req.userId())
                 .password(password)
                 .email(req.email())
-                .role(req.role())
+                .role(role)
                 .build();
 
         // 유저 저장
@@ -181,30 +185,6 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
-    // 로그인
-    @Override
-    public LoginResponse login(LoginRequest req) {
-
-        // 유저 조회
-        User user=userRepository.findById(req.userId())
-                .orElseThrow(()-> new UserNotFoundException("유저를 찾을 수 없습니다."));
-
-        // 비밀번호 확인
-        if(!passwordEncoder.matches(req.password(), user.getPassword())) {
-            throw new UserNotFoundException("유저를 찾을 수 없습니다.");
-        }
-
-        // 유저 상태가 ACTIVE인지 확인
-        if(user.getStatus() != UserStatus.ACTIVE) {
-            throw new UserNotAllowException("유저 상태가 ACTIVE가 아닙니다.");
-        }
-
-        return LoginResponse.builder()
-                .userId(user.getId())
-                .role(user.getRole())
-                .build();
-    }
-
     // 유저 존재 여부 확인
     @Override
     public UserExistsResponse checkUserExists(String userId) {
@@ -219,5 +199,19 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(()->new UserNotFoundException("유저를 찾을 수 없습니다."));
 
         return Objects.equals(user.getRole(), UserRole.ADMIN);
+    }
+
+    // 로그인 관련 정보 조회
+    @Override
+    public UserLoginResponse getLoginInfo(String userId) {
+        User user=userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
+
+        return UserLoginResponse.builder()
+                .id(user.getId())
+                .password(user.getPassword())
+                .status(user.getStatus())
+                .role(user.getRole())
+                .build();
     }
 }

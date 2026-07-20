@@ -1,6 +1,6 @@
 package com.nhnacademy.accountapi.controller;
 
-import com.nhnacademy.accountapi.dto.user.*;
+import com.nhnacademy.accountapi.dto.*;
 import com.nhnacademy.accountapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -88,6 +88,16 @@ public class UserController {
             @PathVariable("user-id") String userId
     ) {
         UserExistsResponse resp=userService.checkUserExists(userId);
+
+        return ResponseEntity.ok(resp);
+    }
+
+    // 유저 로그인 관련 정보 조회
+    @GetMapping("/{user-id}/login-info")
+    public ResponseEntity<UserLoginResponse> getLoginInfo(
+            @PathVariable("user-id") String userId
+    ) {
+        UserLoginResponse resp=userService.getLoginInfo(userId);
 
         return ResponseEntity.ok(resp);
     }

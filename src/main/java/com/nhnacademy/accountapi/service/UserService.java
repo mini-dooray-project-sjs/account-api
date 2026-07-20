@@ -1,8 +1,6 @@
 package com.nhnacademy.accountapi.service;
 
-import com.nhnacademy.accountapi.dto.auth.LoginRequest;
-import com.nhnacademy.accountapi.dto.auth.LoginResponse;
-import com.nhnacademy.accountapi.dto.user.*;
+import com.nhnacademy.accountapi.dto.*;
 
 import java.util.List;
 
@@ -21,7 +19,8 @@ public interface UserService {
 
     UserResponse changeUserStatus(String userId, String requestId, UserStatusUpdateRequest req);
 
-    LoginResponse login(LoginRequest req);
-
     UserExistsResponse checkUserExists(String userId);
+
+    // 로그인 관련 정보 조회
+    UserLoginResponse getLoginInfo(String userId);
 }
